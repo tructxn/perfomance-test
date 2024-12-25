@@ -1,0 +1,29 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: performance-test
+build:
+  artifacts:
+    - image: bun-app
+      context: ../bun
+      docker:
+        dockerfile: Dockerfile
+    - image: node-app
+      context: ../nest
+      docker:
+        dockerfile: Dockerfile
+
+manifests:
+  rawYaml:
+    - ./bun-deployment.yml
+    - ./node-deployment.yml
+
+deploy:
+  kubectl: {}
+profiles:
+  - name: dev
+    activation:
+      - kubeContext: kind-load-test
+    build:
+      local:
+        push: false

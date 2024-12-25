@@ -1,0 +1,6 @@
+./bun/dist
+./bun/node_modules
+./bun/package-lock.json
+./nest/dist
+./nest/node_modules
+./nest/package-lock.json
